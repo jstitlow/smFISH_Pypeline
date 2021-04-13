@@ -20,7 +20,7 @@ from cellpose import models, io
 # load config data from yaml file
 with open('smFISH_analysis.yaml') as file:
     config = yaml.load(file, Loader=yaml.FullLoader)
-    
+
 # setup OMERO connection
 conn = BlitzGateway('bioc1301', config['PASS'],
         port=4064, group=config['group'], host='omero1.bioch.ox.ac.uk') #davisgroup
@@ -186,7 +186,7 @@ def detect_spots(image, imageId, chan, ch):
 
     # detect spots
     rna = get_z_stack(img, chan)
-
+    rna = rna[:,:512,:512]
     # subtract background
     rna_no_bg = []
     for z in rna:
